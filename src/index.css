@@ -44,13 +44,21 @@ Button {
     align-items: center;
 }
 
-.red, .blue, .yellow, .green {
+.red, .blue, .yellow, .green, .redLightUp, .blueLightUp, .greenLightUp, .yellowLightUp {
     height: 350px;
     width: 350px;
     border: 20px solid black;
 }
 
 .green {
+    background-color: #006600;
+    -moz-border-radius: 350px 0 0 0;
+    border-radius: 350px 0 0 0;
+    border-right: 10px solid black;
+    border-bottom: 10px solid black;
+}
+
+.greenLightUp {
     background-color: green;
     -moz-border-radius: 350px 0 0 0;
     border-radius: 350px 0 0 0;
@@ -59,6 +67,14 @@ Button {
 }
 
 .red {
+    background-color: #cc0000;
+    -moz-border-radius: 0 350px 0 0;
+    border-radius: 0 350px 0 0;
+    border-left: 10px solid black;
+    border-bottom: 10px solid black;
+}
+
+.redLightUp {
     background-color: red;
     -moz-border-radius: 0 350px 0 0;
     border-radius: 0 350px 0 0;
@@ -67,6 +83,14 @@ Button {
 }
 
 .yellow {
+    background-color: #cccc00;
+    -moz-border-radius: 0 0 0 350px;
+    border-radius: 0 0 0 350px;
+    border-right: 10px solid black;
+    border-top: 10px solid black;;
+}
+
+.yellowLightUp {
     background-color: yellow;
     -moz-border-radius: 0 0 0 350px;
     border-radius: 0 0 0 350px;
@@ -75,6 +99,14 @@ Button {
 }
 
 .blue {
+    background-color: #0000cc;
+    -moz-border-radius: 0 0 350px 0;
+    border-radius: 0 0 350px 0;
+    border-left: 10px solid black;
+    border-top: 10px solid black;;
+}
+
+.blueLightUp {
     background-color: blue;
     -moz-border-radius: 0 0 350px 0;
     border-radius: 0 0 350px 0;

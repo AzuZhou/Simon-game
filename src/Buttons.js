@@ -5,30 +5,36 @@ import Yellow from './Yellow'
 import Green from './Green'
 
 export default class Buttons extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             lastColor: '',
-            history: []
+            history: [],
+            lightUpColor: ''
         }
     }
 
-    clickHandler = (color) => {
+    lightUp = (color) => {
         this.setState({
-            lastColor: color.target.value
+            lightUpColor: color
         })
+        setTimeout(function () {
+            this.setState({
+                lightUpColor: ''
+            })
+        }.bind(this), 500)
     }
 
     render() {
         return (
             <div className='buttons'>
                 <div className='top-buttons'>
-                    <Green onClick={this.clickHandler} />
-                    <Red onClick={this.clickHandler} />
+                    <Green onClick={this.lightUp} color={this.state.lightUpColor} />
+                    <Red onClick={this.lightUp} color={this.state.lightUpColor} />
                 </div>
                 <div className='bottom-buttons'>
-                    <Yellow onClick={this.clickHandler} />
-                    <Blue onClick={this.clickHandler} />
+                    <Yellow onClick={this.lightUp} color={this.state.lightUpColor} />
+                    <Blue onClick={this.lightUp} color={this.state.lightUpColor} />
                 </div>
             </div>
         )

@@ -7,7 +7,7 @@ export default class Controls extends Component {
                 <h1>Simon</h1>
                 <div className='controls-buttons'>
                     <div className='counter'>
-                        <h2 id='counter'></h2>
+                        <div id='counter'></div>
                         <h4>COUNT</h4>
                     </div>
                     <div className='start'>
