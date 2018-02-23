@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 export default class Yellow extends Component {
     onClick = () => {
-        sound.play()
         this.props.onClick('yellow')
     }
 
@@ -11,4 +10,3 @@ export default class Yellow extends Component {
     }
 }
 
-let sound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3")

@@ -191,9 +191,10 @@ Button {
 .controls-buttons .counter #counter {
     width: 85%;
     height: 50px;
-    background-color: rgb(25, 5, 5);
+    background-color: black;
     border: 8px solid black;
     border-radius: 20px;
+    color: white;
 }
 
 .controls .switch {
@@ -212,6 +213,7 @@ Button {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border: none;
 }
 
 .controls .switch .on-off .on, .controls .switch .on-off .off  {
@@ -221,7 +223,10 @@ Button {
 }
 
 .controls .switch .on-off .off {
-    /* background-color: rgb(13, 152, 186); */
     background-color: white;
+}
+
+.controls .switch .on-off .on {
+    background-color: black;
 }
 
