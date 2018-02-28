@@ -24,42 +24,52 @@ export default class Controls extends Component {
     }
 
     onStart = () => {
-        this.props.started(true)
-        this.props.next()
-        this.setState({
-            step: 1
-        })
+        this.props.started()
     }
 
-    showError = () => {
-        return '! !'
-    }
-
-    show = () => {
-        if (this.props.error) {
-            return this.showError()
-        } else {
-            if (typeof (this.state.step) === 'number') {
-                if (this.state.step.toString().length === 1) {
-                    return '0'.concat(this.state.step)
-                } else {
-                    return this.state.step
-                }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.history !== this.props.history) {
+            if (nextProps.history.length === 0) {
+                number = 0
             } else {
-                return this.state.step
+                number++
+                if (number.toString().length === 1) {
+                    this.setState({
+                        step: '0'.concat(number)
+                    })
+                } else {
+                    this.setState({
+                        step: number
+                    })
+                }
             }
+        }
+        if (this.props.error) {
+            this.setState({
+                step: '! !'
+            })
+            setTimeout(function () {
+                if (number.toString().length === 1) {
+                    this.setState({
+                        step: '0'.concat(number)
+                    })
+                } else {
+                    this.setState({
+                        step: number
+                    })
+                }
+            }.bind(this), 1000)
+            this.props.stopError()
         }
     }
 
     render() {
-
-        // console.log(this.state.step)
         return (
-            <div className='controls'>
+            <div className='controls' style={{ pointerEvents: this.state.on ? 'auto' : 'none' }}>
                 <h1>Simon</h1>
                 <div className='controls-buttons'>
                     <div className='counter'>
-                        <div id='counter'>{this.show()}</div>
+                        <div id='counter'>{this.state.step}</div>
                         <h4>COUNT</h4>
                     </div>
                     <div className='start' onClick={this.onStart}>
@@ -75,8 +85,8 @@ export default class Controls extends Component {
                 <div className='switch'>
                     <h4>ON</h4>
                     <button className='on-off' onClick={this.onClick}>
-                        <div className='on'></div>
-                        <div className='off'></div>
+                        <div className={this.state.on ? 'off' : 'on'} ></div>
+                        < div className={this.state.on ? 'on' : 'off'}></div>
                     </button>
                     <h4>OFF</h4>
                 </div>
@@ -84,4 +94,10 @@ export default class Controls extends Component {
         )
     }
 }
+
+let number = 0
+
+
+
+
 

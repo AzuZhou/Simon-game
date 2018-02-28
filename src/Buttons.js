@@ -9,9 +9,7 @@ export default class Buttons extends Component {
         super(props)
         this.state = {
             lightUpColor: '',
-            started: false,
-            history: [],
-            userHistory: []
+            history: []
         }
     }
 
@@ -32,30 +30,34 @@ export default class Buttons extends Component {
             this.setState({
                 lightUpColor: ''
             })
-        }.bind(this), 800)
+        }.bind(this), 1000)
     }
 
-    play = () => { //plays the sequence
+    play = () => {
         let i = 0
-        let interval = setInterval(() => {
-            this.lightUp(this.state.history[i])
-            i++
-            if (i >= this.state.history.length) {
-                clearInterval(interval)
-            }
-        }, 1200)
+
+        setTimeout(function () {
+            let interval = setInterval(() => {
+                this.lightUp(this.state.history[i])
+                i++
+                if (i >= this.state.history.length) {
+                    clearInterval(interval)
+                    setTimeout(function () {
+                        this.props.finished(true)
+                    }.bind(this), 200)
+                }
+            }, 1200)
+        }.bind(this), 500)
     }
 
     onPress = (color) => {
         this.lightUp(color)
-        this.props.wrong(color)
+        this.props.check(color)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.started !== this.props.started) {
-            this.setState({
-                started: true
-            })
+            this.props.finished(false)
             this.play()
             this.props.stop()
         }
@@ -82,7 +84,7 @@ export default class Buttons extends Component {
                     <Yellow onClick={this.onPress} color={this.state.lightUpColor} />
                     <Blue onClick={this.onPress} color={this.state.lightUpColor} />
                 </div>
-            </div>
+            </ div>
         )
     }
 }
@@ -93,8 +95,3 @@ let yellow = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3")
 let green = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
 
 
-
-// console.log(this.props.autoPlay)
-//         if (this.props.autoPlay) {
-//             this.play()
-//         }

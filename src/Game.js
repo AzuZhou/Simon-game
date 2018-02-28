@@ -10,7 +10,8 @@ export default class Game extends Component {
             started: false,
             userHistory: [],
             wrong: false,
-            autoPlay: false
+            autoPlay: false,
+            display: false
         }
     }
 
@@ -23,8 +24,10 @@ export default class Game extends Component {
 
     started = () => {
         this.setState({
-            started: true
-        })
+            started: true,
+            autoPlay: true,
+            history: []
+        }, () => { this.next() })
     }
 
     stop = () => {
@@ -33,7 +36,7 @@ export default class Game extends Component {
         })
     }
 
-    wrong = (color) => {
+    check = (color) => {
         this.setState({
             userHistory: this.state.userHistory.concat(color)
         }, () => { this.compareArrays() })
@@ -53,6 +56,7 @@ export default class Game extends Component {
                 correct = true
             }
         }
+
         if (correct && this.state.userHistory.length === this.state.history.length) {
             this.setState({
                 autoPlay: true,
@@ -68,12 +72,39 @@ export default class Game extends Component {
         })
     }
 
+    stopError = () => {
+        this.setState({
+            wrong: false
+        })
+    }
+
+    finished = (value) => {
+        this.setState({
+            display: value
+        })
+    }
+
     render() {
 
         return (
-            <div className='main'>
-                <Buttons history={this.state.history} started={this.state.started} stop={this.stop} wrong={this.wrong} autoPlay={this.state.autoPlay ? true : false} stopAutoPlay={this.stopAutoPlay} />
-                <Controls next={this.next} started={this.started} />
+            <div className='main' style={{ pointerEvents: this.state.display ? 'auto' : 'none' }}>
+                <Buttons
+                    history={this.state.history}
+                    userHistory={this.state.userHistory}
+                    started={this.state.started}
+                    stop={this.stop}
+                    check={this.check}
+                    autoPlay={this.state.autoPlay ? true : false}
+                    stopAutoPlay={this.stopAutoPlay}
+                    finished={this.finished}
+                />
+                <Controls
+                    next={this.next}
+                    started={this.started}
+                    history={this.state.history}
+                    error={this.state.wrong}
+                    stopError={this.stopError}
+                />
             </div>
         )
     }
@@ -82,4 +113,12 @@ export default class Game extends Component {
 function getRandom() {
     return Math.floor(Math.random() * Math.floor(4))
 }
+
+
+
+
+
+
+
+
 
