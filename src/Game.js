@@ -11,7 +11,8 @@ export default class Game extends Component {
             userHistory: [],
             wrong: false,
             autoPlay: false,
-            display: false
+            display: false,
+            won: false
         }
     }
 
@@ -22,11 +23,24 @@ export default class Game extends Component {
         })
     }
 
+    on = (value) => {
+        if (value && this.state.started) {
+            this.setState({
+                display: true
+            })
+        } else {
+            this.setState({
+                display: false
+            })
+        }
+    }
+
     started = () => {
         this.setState({
             started: true,
             autoPlay: true,
-            history: []
+            history: [],
+            won: false
         }, () => { this.next() })
     }
 
@@ -56,13 +70,18 @@ export default class Game extends Component {
                 correct = true
             }
         }
-
         if (correct && this.state.userHistory.length === this.state.history.length) {
-            this.setState({
-                autoPlay: true,
-                userHistory: []
-            })
-            this.next()
+            if (this.state.userHistory.length === 20) {
+                this.setState({
+                    won: true
+                }, () => { this.restart() })
+            } else {
+                this.setState({
+                    autoPlay: true,
+                    userHistory: []
+                })
+                this.next()
+            }
         }
     }
 
@@ -84,8 +103,13 @@ export default class Game extends Component {
         })
     }
 
-    render() {
+    restart = () => {
+        setTimeout(function () {
+            this.started()
+        }.bind(this), 1000)
+    }
 
+    render() {
         return (
             <div className='main' style={{ pointerEvents: this.state.display ? 'auto' : 'none' }}>
                 <Buttons
@@ -104,6 +128,9 @@ export default class Game extends Component {
                     history={this.state.history}
                     error={this.state.wrong}
                     stopError={this.stopError}
+                    on={this.on}
+                    won={this.state.won}
+                // restart={this.restart}
                 />
             </div>
         )

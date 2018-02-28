@@ -35,7 +35,6 @@ export default class Buttons extends Component {
 
     play = () => {
         let i = 0
-
         setTimeout(function () {
             let interval = setInterval(() => {
                 this.lightUp(this.state.history[i])

@@ -15,11 +15,13 @@ export default class Controls extends Component {
                 on: true,
                 step: '- -'
             })
+            this.props.on(true)
         } else {
             this.setState({
                 on: false,
                 step: ''
             })
+            this.props.on(false)
         }
     }
 
@@ -69,7 +71,7 @@ export default class Controls extends Component {
                 <h1>Simon</h1>
                 <div className='controls-buttons'>
                     <div className='counter'>
-                        <div id='counter'>{this.state.step}</div>
+                        <div id='counter'>{this.props.won ? '* *' : this.state.step}</div>
                         <h4>COUNT</h4>
                     </div>
                     <div className='start' onClick={this.onStart}>
