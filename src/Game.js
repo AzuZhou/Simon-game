@@ -37,7 +37,6 @@ export default class Game extends Component {
     }
 
     started = () => {
-        console.log('play')
         this.setState({
             started: true,
             autoPlay: true,
