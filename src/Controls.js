@@ -5,7 +5,8 @@ export default class Controls extends Component {
         super(props)
         this.state = {
             on: false,
-            step: ''
+            step: '',
+            strict: false
         }
     }
 
@@ -29,6 +30,13 @@ export default class Controls extends Component {
         this.props.started()
     }
 
+    onStrict = () => {
+        this.setState({
+            strict: !this.state.strict
+        })
+        this.props.strict(!this.state.strict)
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.history !== this.props.history) {
             if (nextProps.history.length === 0) {
@@ -46,6 +54,7 @@ export default class Controls extends Component {
                 }
             }
         }
+
         if (this.props.error) {
             this.setState({
                 step: '! !'
@@ -66,6 +75,7 @@ export default class Controls extends Component {
     }
 
     render() {
+
         return (
             <div className='controls' style={{ pointerEvents: this.state.on ? 'auto' : 'none' }}>
                 <h1>Simon</h1>
@@ -78,8 +88,8 @@ export default class Controls extends Component {
                         <button id='start'></button>
                         <h4>START</h4>
                     </div>
-                    <div className='strict'>
-                        <div className='led'></div>
+                    <div className='strict' onClick={this.onStrict}>
+                        <div className={this.state.strict ? 'ledOn' : 'led'}></div>
                         <button id='strict'></button>
                         <h4>STRICT</h4>
                     </div>
@@ -98,8 +108,21 @@ export default class Controls extends Component {
 }
 
 let number = 0
+// let time = 0
+// if (time === 0) {
+            //     time++
+            //     this.props.strict(this.state.strict)
+            // }
 
 
 
 
+            // if (this.state.strict) {
+            //     this.props.strict()
+            // }
 
+
+            // if (time === 0) {
+            //     time++
+            //     this.props.strict(this.state.strict)
+            // }

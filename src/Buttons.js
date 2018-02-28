@@ -55,7 +55,7 @@ export default class Buttons extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.started !== this.props.started) {
+        if (nextProps.started !== this.props.started || nextProps.started) {
             this.props.finished(false)
             this.play()
             this.props.stop()

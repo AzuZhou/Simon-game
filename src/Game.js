@@ -12,7 +12,8 @@ export default class Game extends Component {
             wrong: false,
             autoPlay: false,
             display: false,
-            won: false
+            won: false,
+            strict: false
         }
     }
 
@@ -36,6 +37,7 @@ export default class Game extends Component {
     }
 
     started = () => {
+        console.log('play')
         this.setState({
             started: true,
             autoPlay: true,
@@ -60,11 +62,19 @@ export default class Game extends Component {
         let correct
         for (let i = 0; i < this.state.userHistory.length; i++) {
             if (this.state.userHistory[i] !== this.state.history[i]) {
-                this.setState({
-                    wrong: true,
-                    autoPlay: true,
-                    userHistory: []
-                })
+                if (this.state.strict) {
+                    this.setState({
+                        wrong: true,
+                        autoPlay: true,
+                        userHistory: []
+                    }, () => { this.restart() })
+                } else {
+                    this.setState({
+                        wrong: true,
+                        autoPlay: true,
+                        userHistory: []
+                    })
+                }
                 correct = false
             } else {
                 correct = true
@@ -109,6 +119,12 @@ export default class Game extends Component {
         }.bind(this), 1000)
     }
 
+    strict = (value) => {
+        this.setState({
+            strict: value
+        })
+    }
+
     render() {
         return (
             <div className='main' style={{ pointerEvents: this.state.display ? 'auto' : 'none' }}>
@@ -123,14 +139,13 @@ export default class Game extends Component {
                     finished={this.finished}
                 />
                 <Controls
-                    next={this.next}
                     started={this.started}
                     history={this.state.history}
                     error={this.state.wrong}
                     stopError={this.stopError}
                     on={this.on}
                     won={this.state.won}
-                // restart={this.restart}
+                    strict={this.strict}
                 />
             </div>
         )
@@ -140,12 +155,4 @@ export default class Game extends Component {
 function getRandom() {
     return Math.floor(Math.random() * Math.floor(4))
 }
-
-
-
-
-
-
-
-
 
