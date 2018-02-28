@@ -176,6 +176,14 @@ Button {
     border: 2px solid black;
 }
 
+.controls-buttons .strict .ledOn {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
 .controls-buttons .counter {
     width: 40%;
 }
