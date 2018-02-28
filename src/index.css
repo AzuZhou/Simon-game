@@ -39,7 +39,7 @@ Button {
 }
 
 .top-buttons, .bottom-buttons {
-    direction: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -91,7 +91,7 @@ Button {
 }
 
 .yellowLightUp {
-    background-color: yellow;
+    background-color: #FFFF33;
     -moz-border-radius: 0 0 0 350px;
     border-radius: 0 0 0 350px;
     border-right: 10px solid black;
@@ -189,12 +189,16 @@ Button {
 }
 
 .controls-buttons .counter #counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 85%;
     height: 50px;
     background-color: black;
     border: 8px solid black;
     border-radius: 20px;
     color: white;
+    font-size: 3.5vw;
 }
 
 .controls .switch {
@@ -206,6 +210,7 @@ Button {
 }
 
 .controls .switch .on-off {
+    pointer-events: auto !important;
     width: 50%;
     height: 35px;
     background-color: black;
@@ -230,3 +235,75 @@ Button {
     background-color: black;
 }
 
+@media screen and (max-width: 425px) {
+    body, html {
+        overflow: hidden;
+    }
+
+    .main {
+        height: 100vh;
+        width: 100vw;
+    }
+    
+    .red, .blue, .yellow, .green, .redLightUp, .blueLightUp, .greenLightUp, .yellowLightUp {
+        height: 50vh;
+        width: 50vw;
+        border: none;
+    }
+
+    .green {
+        background-color: #006600;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    
+    .greenLightUp {
+        background-color: green;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    
+    .red {
+        background-color: #cc0000;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    
+    .redLightUp {
+        background-color: red;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    
+    .yellow {
+        background-color: #cccc00;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    
+    .yellowLightUp {
+        background-color: #FFFF33;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    
+    .blue {
+        background-color: #0000cc;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    
+    .blueLightUp {
+        background-color: blue;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+
+    .controls {
+        border: 6px solid black;
+    }
+
+    .controls-buttons .counter #counter {
+        font-size: 8vw;
+    }
+}
